@@ -38,7 +38,7 @@
 
 
 (defun list-to-bit-vector (my-list)
-  nil)
+  (make-array (length my-list) :element-type 'bit))
 
 (define-test test-list-to-bit-vector
     "you must complete list-to-bit-vector"
