@@ -38,7 +38,15 @@
 
 
 (defun list-to-bit-vector (my-list)
-  (make-array (length my-list) :element-type 'bit))
+  (let((a (make-array (length my-list) :element-type 'bit))
+       (b 0))
+    (dolist (i my-list)
+      (setf (aref a b) i)
+      (setf b (+ b 1))
+    )
+    a
+  )
+)
 
 (define-test test-list-to-bit-vector
     "you must complete list-to-bit-vector"
@@ -46,5 +54,3 @@
   (assert-equal (aref (list-to-bit-vector '(0)) 0) 0)
   (assert-equal (aref (list-to-bit-vector '(0 1)) 1) 1)
   (assert-equal (length (list-to-bit-vector '(0 0 1 1 0 0 1 1))) 8))
-
-
