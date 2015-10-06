@@ -15,11 +15,29 @@
 
 "you need to write the triangle method"
 
+(defun list-left-shift (l)
+  (append (cdr l) (list (car l))))
+
+(defun is-scalene(a b c)
+  (let* ((l (list a b c)) (y (max a b c)) (r (delete y l)))
+    (= (expt y 2) (+ (expt (first r) 2) (expt (second r) 2)))
+  )
+)
+
 (define-condition triangle-error  (error) ())
 
 (defun triangle (a b c)
-  :write-me)
-
+  (let ((l (list a b c)))
+    (dotimes (i 3)
+      (if (<= (+ (first l) (second l)) (third l)) (error 'triangle-error))
+      (setf l (list-left-shift l)))
+    (if (= a b c) (return-from triangle :equilateral))
+    (dotimes (i 3)
+      (if (= (first l) (second l)) (return-from triangle :isosceles))
+      (setf l (list-left-shift l)))
+  )
+  :scalene
+)
 
 (define-test test-equilateral-triangles-have-equal-sides
     (assert-equal :equilateral (triangle 2 2 2))
