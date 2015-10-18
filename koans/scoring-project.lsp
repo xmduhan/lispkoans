@@ -49,10 +49,8 @@
 ;
 ; Your goal is to write the score method.
 
-;(defun score (dice)
+(defun score (dice)
   ; You need to write this method
-;)
-(defun score(dice)
   (let ((result 0) (process-list nil))
     (loop for i in dice do
         (push i process-list)
