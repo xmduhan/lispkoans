@@ -49,8 +49,26 @@
 ;
 ; Your goal is to write the score method.
 
-(defun score (dice)
+;(defun score (dice)
   ; You need to write this method
+;)
+(defun score(dice)
+  (let ((result 0) (process-list nil))
+    (loop for i in dice do
+        (push i process-list)
+        (if (= i 5) (incf result 50))
+        (if (= i 1) (incf result 100))
+        (if (= (count i process-list) 3)
+          (progn
+            (if (= i 1)
+                (incf result 700)
+                (incf result (* 100 i)))
+            (if (= i 5) (decf result 150))
+          )
+        )
+    )
+    result
+  )
 )
 
 (define-test test-score-of-an-empty-list-is-zero
