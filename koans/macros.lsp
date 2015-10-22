@@ -121,8 +121,8 @@
   "log-form does not interfere with the usual return value"
   (assert-equal 1978 (log-form (* 2 23 43)))
   "log-form records the code which it has been passed"
-  (assert-equal ___ (length *log*))
-  (assert-equal ___ (first *log*))
+  (assert-equal 1 (length *log*))
+  (assert-equal '(* 2 23 43) (first *log*))
   "macros evaluating to more macros is ok, if confusing"
   (assert-equal 35 (log-form (log-form (- 2013 1978))))
   (assert-equal 3 (length *log*))
@@ -140,9 +140,7 @@
    to the list *log-with-value* and then evalues the body normally"
   `(let ((logform nil)
          (retval ,form))
-
-     ;; YOUR MACRO COMPLETION CODE GOES HERE.
-
+     (push (list :form ',form :value retval) *log-with-value*)
      retval))
 
 
